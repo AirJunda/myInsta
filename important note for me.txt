@@ -1,2 +1,7 @@
 the link for writing django in vs code tut:
 https://code.visualstudio.com/docs/python/tutorial-django
+
+django-admin startproject new_project .
+
+python manage.py runserver
+http://127.0.0.1:8000/
