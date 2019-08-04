@@ -15,3 +15,9 @@ mkvirtualenv myproject
 workon myproject
 
 将F:\Anaconda\Lib\site-packages/django/bin加入到环境变量中（我的电脑，右键属性，高级系统设置，环境变量）
+
+多行注释：选定内容，先CTRL+K，然后CTRL+C 
+取消注释：选定内容，先CTRL+K，然后CTRL+U
+
+# runing the server:
+python manage.py runserver
