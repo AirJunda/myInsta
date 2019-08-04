@@ -5,3 +5,13 @@ django-admin startproject new_project .
 
 python manage.py runserver
 http://127.0.0.1:8000/
+
+pipenv吗？ 直接在你有Pipfile 和 Pipfile.lock的那个路径下Pipenv shell就行了(重新启用虚拟环境的方法)
+
+BELOW IS FOR VIRTUALENV
+# 创建一个虚拟环境
+mkvirtualenv myproject
+#使用，激活该环境，这样以后使用pip安装包将安装到该环境下
+workon myproject
+
+将F:\Anaconda\Lib\site-packages/django/bin加入到环境变量中（我的电脑，右键属性，高级系统设置，环境变量）
