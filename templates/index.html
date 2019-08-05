@@ -1,0 +1,16 @@
+{% load static %}
+
+<div>
+    <a href= "{% url 'make_post' %}">Make Post</a>>
+</div>>
+
+<div>
+    {% for post in object_list %}
+
+       <a href = "{% url 'post_detail'  post.id %}">  <!--ppt没有的语法--> 
+
+       <img src="/{{  post.image  }}" width=500 height=500>
+       </a>
+    {% endfor %}
+
+</div>

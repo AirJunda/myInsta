@@ -21,3 +21,5 @@ workon myproject
 
 # runing the server:
 python manage.py runserver
+
+username is airjunda for the superuser

@@ -17,7 +17,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 from Insta.views import HelloWorld
+from Insta.views import PostsView, PostDetailView, PostCreatView
 
 urlpatterns = [
-    path('', HelloWorld.as_view(),name='home')
+    path('', HelloWorld.as_view(),name='home'),
+    path('posts/', PostsView.as_view(),name='posts'),
+    path('post/<int:pk>', PostDetailView.as_view(),name='post_detail'),
+    path('post/new/', PostCreatView.as_view(),name='make_post'),
+
 ]
