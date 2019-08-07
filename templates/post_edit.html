@@ -1,0 +1,7 @@
+<h1>Edit your Post</h1>
+<form action='' method='post' enctype="multipart/form-data" >
+    {% csrf_token  %}  <!--用以保护免受攻击。写着就行-->  
+    {{ form.as_p   }}   <!--不太理解的。查查doc  , field in form 按段落显示 -->  
+
+    <button type='submit'>Save</button>>
+</form>

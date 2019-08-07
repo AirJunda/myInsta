@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import include, path
 
 from Insta.views import HelloWorld
-from Insta.views import PostsView, PostDetailView, PostCreatView
+from Insta.views import PostsView, PostDetailView, PostCreatView,PostUpdateView, PostDeleteView, SignUp
 
 urlpatterns = [
     path('', HelloWorld.as_view(),name='home'),
     path('posts/', PostsView.as_view(),name='posts'),
     path('post/<int:pk>', PostDetailView.as_view(),name='post_detail'),
     path('post/new/', PostCreatView.as_view(),name='make_post'),
+    path('post/edit/<int:pk>', PostUpdateView.as_view(),name='edit_post'),
+    path('post/delete/<int:pk>', PostDeleteView.as_view(),name='delete_post'),
+    path('arthr/signup', SignUp.as_view(),name='signup'),
 
 ]

@@ -1,4 +1,7 @@
 from django.db import models
+from django.urls import reverse
+
+from django.contrib.auth.models import User
 from imagekit.models import ProcessedImageField
 
 # Create your models here.
@@ -12,3 +15,9 @@ class Post(models.Model):
         blank=True,
         null = True
     )
+
+# this mehtod is to allow the page to redirect to a pre-defined page after submiting the form. Here, we aim to
+# direct it to the post just submitted. 
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)]) 
+

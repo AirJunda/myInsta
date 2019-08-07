@@ -1,0 +1,10 @@
+<h1>Sign Up</h1>
+
+<form method = 'post'>
+    {% csrf_token  %}  <!--用以保护免受攻击。写着就行-->  
+    {{ form.as_p   }}   
+    
+        <button type='submit'>Confirm and Join!</button>
+
+
+</form>
