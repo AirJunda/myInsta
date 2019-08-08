@@ -19,6 +19,6 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('insta/', include('Insta.urls')),
-    path('authr/',include('django.contrib.auth.urls')),
+    path('authr/',include('django.contrib.auth.urls')), #包含了login的URL
     
 ]

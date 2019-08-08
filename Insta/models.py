@@ -1,8 +1,9 @@
 from django.db import models
 from django.urls import reverse
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from imagekit.models import ProcessedImageField
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Post(models.Model):
@@ -21,3 +22,11 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)]) 
 
+class InstaUser(AbstractUser):
+    profile_pic = ProcessedImageField(
+        upload_to = 'static/images/profile_users',
+        format = 'JPEG',
+        options={'quality':100},
+        blank=True,
+        null = True
+        )
