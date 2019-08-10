@@ -1,6 +1,6 @@
-{% load static %}
 
-<ul>
+{% extends "base.html" %}
+<!-- <ul>
     {% if request.user.is_authenticated %}
     <p> Hi, {{request.user.username}}</p>
     <p> 
@@ -14,11 +14,10 @@
         <a href="{% url 'signup' %}">Sign Up</a> 
     </li>
     {% endif %}
+</ul> -->
 
 
-
-</ul>
-
+{% block content %}
 <div>
     <a href= "{% url 'make_post' %}">Make Post</a>
 </div>
@@ -33,3 +32,5 @@
     {% endfor %}
 
 </div>
+
+{% endblock content%}
