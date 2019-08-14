@@ -1,8 +1,9 @@
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
-from .models import Post, InstaUser
+from .models import Post, InstaUser, Like
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from annoying.decorators import ajax_request
 #from django.contrib.auth.forms import UserCreationForm
 #from django.contrib.auth.models import User # m多余的。是我认为需要额外添加user model时按操作加的
 
@@ -45,3 +46,25 @@ class SignUp(CreateView):
     success_url = reverse_lazy('login')
 
 
+class UserDetailView(DetailView):
+        model = InstaUser
+        template_name = 'user_detail.html'
+        #login_url = 'login'
+
+@ajax_request
+def addLike(request):
+    post_pk = request.POST.get('post_pk')
+    post = Post.objects.get(pk=post_pk)
+    try:
+        like = Like(post=post, user=request.user)
+        like.save()
+        result = 1
+    except Exception as e:
+        like = Like.objects.get(post=post, user=request.user)
+        like.delete()
+        result = 0
+
+    return {
+        'result': result,
+        'post_pk': post_pk
+    }

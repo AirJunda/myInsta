@@ -1,7 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
 <h1>Delete your Post</h1>
 <form action='' method='post' enctype="multipart/form-data" >
     {% csrf_token  %}  <!--用以保护免受攻击。写着就行-->  
-    <p>Are you sure you want to delete {{post.title}}</p>>
+    <p>Are you sure you want to delete {{post.title}}</p>
 
-    <button type='submit'>Yes I am sure!</button>>
+    <button type='submit'>Yes I am sure!</button>
 </form>
+{% endblock content %}

@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('insta/', include('Insta.urls')),
+    path('', include('Insta.urls')),  #如果这里设置 'insta/'，会导致点赞无反应
     path('authr/',include('django.contrib.auth.urls')), #包含了login的URL
+ 
     
 ]

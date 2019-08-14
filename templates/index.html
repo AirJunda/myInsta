@@ -1,36 +1,50 @@
-
 {% extends "base.html" %}
-<!-- <ul>
-    {% if request.user.is_authenticated %}
-    <p> Hi, {{request.user.username}}</p>
-    <p> 
-        <a href="{% url 'logout' %}">Logout</a>          
-    </p>
-    {% else %}
-    <li>
-        <a href="{% url 'login' %}">Login</a> 
-    </li>
-    <li>
-        <a href="{% url 'signup' %}">Sign Up</a> 
-    </li>
-    {% endif %}
-</ul> -->
-
+{% load custom_tags %}
 
 {% block content %}
-<div>
-    <a href= "{% url 'make_post' %}">Make Post</a>
-</div>
-
-<div>
+<div class="cards-listing">
     {% for post in object_list %}
+        <div class="row">
+            <div class="card view-update {{ post.pk }}">
+                <div class="card__panel-head">
+                    <div class="poster__info">
+                        <a href="{% url 'user_detail' post.author.id  %}" class="poster__name">
+                            {% if post.author.profile_pic %}
+                                <img class="poster__profilepic" src="/{{ post.author.profile_pic.url }}">
+                            {% endif %}
+                            {{ post.author.username }}
+                        </a>
+                    </div>
+                </div>
+                <a href="{% url 'post_detail' post.pk %}">
+                    <img class="card__main-image" src="/{{ post.image.url }}">   <!-- 必须路径前加“/” -->
+                </a>
 
-       <a href = "{% url 'post_detail'  post.id %}">  <!--ppt没有的语法--> 
+                <div class="card__panel-body">  <!-- 处理like的显示和单复数显示 -->
+                    <div class="likes">
+                        {% if post.get_like_count > 1 %}
+                            {{ post.get_like_count }} likes
+                        {% endif %}
 
-       <img src="/{{  post.image  }}" width=500 height=500>
-       </a>
+                        {% if post.get_like_count == 1 %}
+                            {{ post.get_like_count }} like
+                        {% endif %}
+                    </div>
+
+                    <section class="input-row">  <!-- 加小心心 -->
+                        <i class="fa {% has_user_liked_post post user %} submit-like" aria-hidden="true"></i>
+                        <!-- 在大括号里， funcition + 空格+ argument(s) 来call  -->
+                        <div class="hidden-data {{ post.pk }}" style="display: none;">
+                            <span class="post-pk">{{ post.pk }}</span>
+                        </div>
+                    </section>               
+                </div>
+                
+
+
+            </div>
+        </div>
     {% endfor %}
-
 </div>
 
-{% endblock content%}
+{% endblock content %}
