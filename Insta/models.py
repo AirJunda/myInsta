@@ -59,7 +59,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
 # this mehtod is to allow the page to redirect to a pre-defined page after submiting the form. Here, we aim to
 # direct it to the post just submitted. 
     def get_absolute_url(self):
@@ -67,6 +66,9 @@ class Post(models.Model):
 
     def get_like_count(self):
         return self.likes.count()
+
+    def get_comment_count(self):
+        return self.comments.count()
 
 
 class Comment(models.Model):
