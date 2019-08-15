@@ -5,7 +5,7 @@
 <div class="row single-post">
     <div class="single-post-card view-update {{ object.pk }}">
         <div class="header">
-            <a href="{% url 'home' %}">  <!-- url这里暂时换成home -->
+            <a href="{% url 'user_detail' user.pk %}">  
                 {% if object.author.profile_pic %}
                     <img class="picture-circle--medium" src="/{{object.author.profile_pic.url}}">
                 {% endif %}

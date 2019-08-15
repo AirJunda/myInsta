@@ -18,7 +18,7 @@ from django.urls import include, path
 
 from Insta.views import HelloWorld
 from Insta.views import (PostsView, PostDetailView, PostCreatView,PostUpdateView, 
-                         PostDeleteView, SignUp, addLike, UserDetailView)
+                         PostDeleteView, SignUp, addLike, UserDetailView,addComment,toggleFollow)
 
 urlpatterns = [
     path('helloworld', HelloWorld.as_view(),name='home'),
@@ -30,5 +30,9 @@ urlpatterns = [
     path('arthr/signup', SignUp.as_view(),name='signup'),
     path('like', addLike, name='addLike'),
     path('user/<int:pk>', UserDetailView.as_view(), name='user_detail'),
+    path('comment', addComment, name='addComment'),
+    path('togglefollow', toggleFollow, name='togglefollow'),   #处理关注和取关
+
+
 
 ]
