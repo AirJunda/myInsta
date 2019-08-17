@@ -8,23 +8,12 @@
             <div class="card view-update {{ post.pk }}">
                 <div class="card__panel-head">
                     <div class="poster__info">
-                        {% if not request.user.is_authenticated %}
-                        <div class="poster__name">
-                                {% if post.author.profile_pic %}
-                                    <img class="poster__profilepic" src="/{{ post.author.profile_pic.url }}">
-                                {% endif %}
-                                {{ post.author.username }}
-                                
-                        </div>
-                        {% else %}  
                         <a href="{% url 'user_detail' post.author.id  %}" class="poster__name">
                             {% if post.author.profile_pic %}
                                 <img class="poster__profilepic" src="/{{ post.author.profile_pic.url }}">
                             {% endif %}
                             {{ post.author.username }}
-                            
                         </a>
-                        {% endif %} 
                         <span class="poster__timestamp">
                             {{ post.posted_on|timesince }}
                         </span>
@@ -33,7 +22,6 @@
                 <a href=" {% if request.user.is_authenticated %}{% url 'post_detail' post.pk %} {% endif %}">
                     <img class="card__main-image" src="/{{ post.image.url }}">   <!-- 必须路径前加“/” -->
                 </a>
-  
 
                 <div class="card__panel-body">  <!-- 处理like的显示和单复数显示 -->
                     <div class="likes">
@@ -48,15 +36,6 @@
                     {% if request.user.is_authenticated %}
                     <ul class="comment-list">
                         <a class="view-more"></a>
-                        
-                        <li class="comment-list__comment">
-                                <a href="{% url 'user_detail' user.pk %}" class="user">
-                                    {{ post.author.username }}
-                                </a>
-                                <span class="post_title">{{ post.title }}</span>
-                            </li>
-
-
                         {% for comment in post.comments.all %}
                         <li class="comment-list__comment">
                             <a href="{% url 'user_detail' comment.user.pk %}" class="user">

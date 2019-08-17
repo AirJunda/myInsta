@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Insta.models import Post, InstaUser, Comment, Like,  UserConnection
+from Insta.models import Post, InstaUser, Comment, Like, UserConnection
 # Register your models here.
 admin.site.register(Post)
 admin.site.register(InstaUser)

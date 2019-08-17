@@ -27,6 +27,13 @@
                 </span>
             </div>
             <ul class="comment-list">
+
+                <li class="comment-list__comment">
+                    <a href="{% url 'user_detail' user.pk %}" class="user">
+                        {{ post.author.username }}
+                    </a>
+                    <span class="post_title">{{ post.title }}</span>
+                </li>
                 {% for comment in object.comments.all %}
                 <li class="comment-list__comment">
                     <a href="{% url 'user_detail' comment.user.pk %}" class="user">

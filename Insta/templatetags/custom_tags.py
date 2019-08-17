@@ -29,3 +29,7 @@ def active(context, pattern_or_urlname):
     if re.search(pattern, path):
         return 'active'
     return ''
+
+@register.simple_tag
+def linkPostAuthor(user,post):
+    post.author.username =user.username

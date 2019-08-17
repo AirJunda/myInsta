@@ -14,9 +14,46 @@ from Insta.forms import CustomUserCreationForm
 class HelloWorld(TemplateView):
     template_name = 'examplepage.html'
 
-class PostsView(ListView):
+class PostsView(ListView):  # 把db中所有的post存到object_list
     model= Post
     template_name='index.html'   #page to list and to present posts
+    
+
+class FollowingPostsView(ListView):  # 把db中所有的post存到object_list
+    model= Post
+    template_name='index.html'   #page to list and to present posts
+    
+    def get_queryset(self):  #override DJ自带的
+        current_user = self.request.user
+        following = set()
+        for conn in UserConnection.objects.filter(creator=current_user).select_related('following'):
+            following.add(conn.following)
+        return Post.objects.filter(author__in=following)
+
+
+class FollowingUserView(ListView):  
+    model= InstaUser
+    template_name='following.html' 
+
+    def get_queryset(self):  #override DJ自带的
+        current_user = self.request.user
+        following = set()
+        for conn in UserConnection.objects.filter(creator=current_user).select_related('following'):
+            following.add(conn.following)
+        return InstaUser.objects.filter(username__in=following)
+
+class FollowerView(ListView):
+    model= InstaUser
+    template_name='follower.html' 
+
+    def get_queryset(self):  #override DJ自带的
+        current_user = self.request.user
+        follower = set()
+        for conn in UserConnection.objects.filter(following=current_user).select_related('creator'):
+            follower.add(conn.creator)
+        return InstaUser.objects.filter(username__in=follower)
+
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -26,11 +63,21 @@ class PostCreatView(LoginRequiredMixin,CreateView):
     model = Post
     template_name = 'post_create.html'
     fields = '__all__'  #提供所有field
+    #fields = ['title','image']
     login_url = 'login'  # 加入这个。那么post时候会导向login page.这样以保证只有login才能post
+    
 class PostUpdateView(UpdateView):
     model = Post
     template_name= 'post_edit.html'
     fields = ['title']
+
+
+class UserUpdateView(LoginRequiredMixin,UpdateView):
+    model = InstaUser
+    template_name= 'edit_profile.html'
+    fields = ['profile_pic','username']  
+    login_url = 'login'  
+  
 
 class PostDeleteView(DeleteView):
     model = Post
@@ -50,6 +97,11 @@ class UserDetailView(DetailView):
         model = InstaUser
         template_name = 'user_detail.html'
         #login_url = 'login'
+
+
+
+
+
 
 @ajax_request
 def addLike(request):
