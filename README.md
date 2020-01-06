@@ -1,5 +1,5 @@
 # myInsta
-my first django project for building an ins system
+my first django project for building an nano instagram system.
 
 
 This is the source code for my own personal project called InsDagram. 
